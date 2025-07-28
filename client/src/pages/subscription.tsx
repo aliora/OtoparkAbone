@@ -103,7 +103,7 @@ export default function SubscriptionPage() {
                   selectedParkingId ? 'transform translate-x-0 opacity-100' : 'transform translate-x-full opacity-0'
                 }`}>
                   <div className="p-8 h-full overflow-y-auto">
-                    <div className="flex justify-between items-center mb-8">
+                    <div className="flex justify-between items-center mb-6">
                       <h2 className="text-3xl font-bold text-turkish-blue">Abonelik İşlemi</h2>
                       <button
                         onClick={() => setSelectedParkingId("")}
@@ -112,6 +112,33 @@ export default function SubscriptionPage() {
                         ← Geri Dön
                       </button>
                     </div>
+                    
+                    {/* Selected Parking Info */}
+                    {(() => {
+                      const selectedLocation = displayedLocations.find(loc => loc.id === selectedParkingId);
+                      return selectedLocation ? (
+                        <div className="mb-6 bg-white rounded-lg shadow-lg p-6 border-2 border-turkish-blue glow">
+                          <div className="flex items-center gap-4">
+                            <div className="w-16 h-16 rounded-lg bg-gradient-to-r from-turkish-blue to-deep-navy flex items-center justify-center">
+                              <span className="text-white font-bold text-sm">İSTAY</span>
+                            </div>
+                            <div className="flex-1">
+                              <h3 className="text-lg font-bold text-deep-navy">{selectedLocation.name}</h3>
+                              <p className="text-cool-gray text-sm">{selectedLocation.address}</p>
+                              <div className="flex items-center gap-4 mt-2">
+                                <span className="text-sm text-cool-gray">Kapasite: {selectedLocation.capacity} araç</span>
+                                <span className="text-sm text-cool-gray">{selectedLocation.operatingHours}</span>
+                              </div>
+                            </div>
+                            <div className="text-right">
+                              <div className="text-2xl font-bold text-turkish-blue">₺299</div>
+                              <div className="text-sm text-cool-gray">Aylık</div>
+                            </div>
+                          </div>
+                        </div>
+                      ) : null;
+                    })()}
+                    
                     <SubscriptionForm 
                       selectedParkingId={selectedParkingId}
                       onSuccess={handleSubscriptionSuccess}

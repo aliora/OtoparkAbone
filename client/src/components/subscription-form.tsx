@@ -194,14 +194,7 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
               <p className="text-sm text-red-600 mt-1">Ad ve soyad gerekli</p>
             )}
           </div>
-          <div className="mb-4">
-            <div className="bg-gray-50 p-3 rounded-lg">
-              <div className="text-sm text-gray-600">Seçilen Otopark</div>
-              <div className="text-lg font-bold text-deep-navy">Otopark #{selectedParkingId}</div>
-              <div className="text-sm text-gray-600 mt-2">Aylık Tarife</div>
-              <div className="text-xl font-bold text-turkish-blue">₺299</div>
-            </div>
-          </div>
+
           <Button
             onClick={() => {
               const licensePlate = form.getValues("licensePlate");
