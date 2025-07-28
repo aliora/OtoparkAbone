@@ -12,7 +12,7 @@ import type { ParkingLocation } from "@shared/schema";
 export default function SubscriptionPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedParkingId, setSelectedParkingId] = useState<string>("");
-  const [showAllParkings, setShowAllParkings] = useState(false);
+
   const [successData, setSuccessData] = useState<{
     plan: string;
     planPrice: string;
@@ -29,8 +29,7 @@ export default function SubscriptionPage() {
     location.district.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const displayedLocations = showAllParkings ? filteredLocations : filteredLocations.slice(0, 8);
-  const remainingCount = filteredLocations.length - 8;
+  const displayedLocations = filteredLocations;
 
   const handleSubscriptionSuccess = (data: { plan: string; planPrice: string; licensePlate: string }) => {
     setSuccessData(data);
@@ -95,17 +94,7 @@ export default function SubscriptionPage() {
                   </div>
                 )}
 
-                {/* Show More Button */}
-                {!showAllParkings && remainingCount > 0 && (
-                  <div className="text-center mt-8">
-                    <button
-                      onClick={() => setShowAllParkings(true)}
-                      className="gozatbtn"
-                    >
-                      Daha Fazla Otopark Göster (+{remainingCount})
-                    </button>
-                  </div>
-                )}
+
               </div>
 
               {/* Subscription Form Overlay */}
