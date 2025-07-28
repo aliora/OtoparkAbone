@@ -110,17 +110,17 @@ export default function SubscriptionPage() {
 
               {/* Subscription Form Overlay */}
               {selectedParkingId && (
-                <div className={`absolute top-0 right-0 w-1/2 h-full bg-gray-50 transition-all duration-700 ease-in-out ${
+                <div className={`absolute top-0 right-0 w-2/3 h-full bg-gray-50 transition-all duration-700 ease-in-out ${
                   selectedParkingId ? 'transform translate-x-0 opacity-100' : 'transform translate-x-full opacity-0'
                 }`}>
-                  <div className="p-6 h-full overflow-y-auto">
-                    <div className="flex justify-between items-center mb-6">
-                      <h2 className="text-2xl font-bold text-turkish-blue">Abonelik İşlemi</h2>
+                  <div className="p-8 h-full overflow-y-auto">
+                    <div className="flex justify-between items-center mb-8">
+                      <h2 className="text-3xl font-bold text-turkish-blue">Abonelik İşlemi</h2>
                       <button
                         onClick={() => setSelectedParkingId("")}
-                        className="close-button text-sm px-3 py-1"
+                        className="close-button"
                       >
-                        ← Geri
+                        ← Geri Dön
                       </button>
                     </div>
                     <SubscriptionForm 

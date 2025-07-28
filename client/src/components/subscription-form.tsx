@@ -32,11 +32,11 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
         if (nextStepElement) {
           nextStepElement.scrollIntoView({ 
             behavior: 'smooth', 
-            block: 'start',
+            block: 'center',
             inline: 'nearest'
           });
         }
-      }, 300); // Delay to allow animation to start
+      }, 400); // Delay to allow animation to start
       return () => clearTimeout(timer);
     }
   }, [currentStep]);
@@ -162,15 +162,15 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
 
   return (
     <>
-      <div className="max-w-md mx-auto space-y-6">
+      <div className="max-w-lg mx-auto space-y-8">
         {/* Step 1: License Plate */}
         <div 
           data-step="1"
-          className={`bg-white rounded-lg shadow-lg p-6 transition-all duration-700 transform ${
+          className={`bg-white rounded-lg shadow-lg p-8 transition-all duration-700 transform ${
             currentStep === 1 ? 'translate-x-0 opacity-100' : 
             currentStep > 1 ? '-translate-x-full opacity-0' : 'translate-x-full opacity-0'
           }`}>
-          <h3 className="text-xl font-bold text-deep-navy mb-6">1. Plaka Bilgisi</h3>
+          <h3 className="text-2xl font-bold text-deep-navy mb-6 text-center">1. Plaka Bilgisi</h3>
           <div className="mb-4">
             <Label htmlFor="licensePlate">Plaka Numarası</Label>
             <Input
@@ -235,11 +235,11 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
         {/* Step 2: Contact Information */}
         <div 
           data-step="2"
-          className={`bg-white rounded-lg shadow-lg p-6 transition-all duration-700 transform ${
+          className={`bg-white rounded-lg shadow-lg p-8 transition-all duration-700 transform ${
             currentStep === 2 ? 'translate-x-0 opacity-100' : 
             currentStep > 2 ? '-translate-x-full opacity-0' : 'translate-x-full opacity-0'
           }`}>
-          <h3 className="text-xl font-bold text-deep-navy mb-6">2. İletişim Bilgileri</h3>
+          <h3 className="text-2xl font-bold text-deep-navy mb-6 text-center">2. İletişim Bilgileri</h3>
           <div className="space-y-4">
             <div>
               <Label htmlFor="email">E-posta</Label>
@@ -292,10 +292,10 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
         {/* Step 3: Payment Information */}
         <div 
           data-step="3"
-          className={`bg-white rounded-lg shadow-lg p-6 transition-all duration-700 transform ${
+          className={`bg-white rounded-lg shadow-lg p-8 transition-all duration-700 transform ${
             currentStep === 3 ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
           }`}>
-          <h3 className="text-xl font-bold text-deep-navy mb-6">3. Ödeme Bilgileri</h3>
+          <h3 className="text-2xl font-bold text-deep-navy mb-6 text-center">3. Ödeme Bilgileri</h3>
           <div className="space-y-4">
             <div>
               <Label htmlFor="cardNumber">Kart Numarası</Label>
