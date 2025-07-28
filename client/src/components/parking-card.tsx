@@ -71,15 +71,9 @@ export default function ParkingCard({ location, isSelected, onSelect }: ParkingC
       
       <div className="flex items-center justify-between mt-auto">
         <div className="flex items-center gap-3">
-          <button
-            className="relative bg-turkish-blue hover:bg-turkish-blue/90 text-white px-4 py-2 rounded-lg font-semibold transition-all duration-300 group"
-            title="₺299/ay"
-          >
-            Abone Ol
-            {/* Desktop hover tooltip */}
-            <div className="hidden md:block absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
-              ₺299/ay
-            </div>
+          <button className="abonebtn" onClick={() => onSelect()}>
+            <span>Abone Ol</span>
+            <span>₺299/ay</span>
           </button>
           {/* Mobile price display */}
           <div className="md:hidden text-sm text-turkish-blue font-semibold">
