@@ -145,6 +145,14 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
     createSubscriptionMutation.mutate(data);
   };
 
+  // Auto-advance to license plate step on form load
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCurrentStep(1);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
       <div className="max-w-lg mx-auto relative h-[600px]">
