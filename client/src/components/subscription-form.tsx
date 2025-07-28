@@ -145,12 +145,12 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
 
   return (
     <>
-      <div className="space-y-4">
+      <div className="max-w-md mx-auto space-y-6">
         {/* Step 1: License Plate */}
-        <div className={`bg-white rounded-lg shadow-md p-6 transition-all duration-700 transform ${
+        <div className={`bg-white rounded-lg shadow-lg p-6 transition-all duration-700 transform ${
           currentStep >= 1 ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
         }`}>
-          <h3 className="text-lg font-bold text-deep-navy mb-4">1. Plaka Bilgisi</h3>
+          <h3 className="text-xl font-bold text-deep-navy mb-6">1. Plaka Bilgisi</h3>
           <div className="mb-4">
             <Label htmlFor="licensePlate">Plaka Numarası</Label>
             <Input
@@ -213,10 +213,10 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
         </div>
 
         {/* Step 2: Contact Information */}
-        <div className={`bg-white rounded-lg shadow-md p-6 transition-all duration-700 transform ${
+        <div className={`bg-white rounded-lg shadow-lg p-6 transition-all duration-700 transform ${
           currentStep >= 2 ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
-        }`} style={{ transitionDelay: currentStep >= 2 ? '200ms' : '0ms' }}>
-          <h3 className="text-lg font-bold text-deep-navy mb-4">2. İletişim Bilgileri</h3>
+        }`} style={{ transitionDelay: currentStep >= 2 ? '300ms' : '0ms' }}>
+          <h3 className="text-xl font-bold text-deep-navy mb-6">2. İletişim Bilgileri</h3>
           <div className="space-y-4">
             <div>
               <Label htmlFor="email">E-posta</Label>
@@ -267,10 +267,10 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
         </div>
 
         {/* Step 3: Payment Information */}
-        <div className={`bg-white rounded-lg shadow-md p-6 transition-all duration-700 transform ${
+        <div className={`bg-white rounded-lg shadow-lg p-6 transition-all duration-700 transform ${
           currentStep >= 3 ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
-        }`} style={{ transitionDelay: currentStep >= 3 ? '400ms' : '0ms' }}>
-          <h3 className="text-lg font-bold text-deep-navy mb-4">3. Ödeme Bilgileri</h3>
+        }`} style={{ transitionDelay: currentStep >= 3 ? '600ms' : '0ms' }}>
+          <h3 className="text-xl font-bold text-deep-navy mb-6">3. Ödeme Bilgileri</h3>
           <div className="space-y-4">
             <div>
               <Label htmlFor="cardNumber">Kart Numarası</Label>

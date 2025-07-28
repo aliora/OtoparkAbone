@@ -64,13 +64,15 @@ export default function SubscriptionPage() {
               </div>
             </div>
 
-            {/* Main Grid Layout */}
-            <div className="grid lg:grid-cols-4 gap-8">
-              {/* Left side - Parking Cards (3/4 width) */}
-              <div className="lg:col-span-3">
+            {/* Main Layout with Slide Animation */}
+            <div className="relative min-h-screen overflow-hidden">
+              {/* Parking Cards Container */}
+              <div className={`transition-all duration-700 ease-in-out ${
+                selectedParkingId ? 'transform -translate-x-full opacity-50' : 'transform translate-x-0 opacity-100'
+              }`}>
                 {/* Parking Cards Grid */}
                 {isLoading ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {[...Array(8)].map((_, i) => (
                       <div key={i} className="bg-white p-6 rounded-lg shadow-md animate-pulse">
                         <div className="h-20 bg-gray-200 rounded mb-4"></div>
@@ -81,7 +83,7 @@ export default function SubscriptionPage() {
                     ))}
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6" id="parkingGarageContainer">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-6" id="parkingGarageContainer">
                     {displayedLocations.map((location) => (
                       <ParkingCard
                         key={location.id}
@@ -98,7 +100,7 @@ export default function SubscriptionPage() {
                   <div className="text-center mt-8">
                     <button
                       onClick={() => setShowAllParkings(true)}
-                      className="aboneol-btn"
+                      className="gozatbtn"
                     >
                       Daha Fazla Otopark Göster (+{remainingCount})
                     </button>
@@ -106,15 +108,28 @@ export default function SubscriptionPage() {
                 )}
               </div>
 
-              {/* Right side - Subscription Form (1/4 width) */}
-              <div className="lg:col-span-1">
-                {selectedParkingId && (
-                  <SubscriptionForm 
-                    selectedParkingId={selectedParkingId}
-                    onSuccess={handleSubscriptionSuccess}
-                  />
-                )}
-              </div>
+              {/* Subscription Form Overlay */}
+              {selectedParkingId && (
+                <div className={`absolute inset-0 bg-gray-50 transition-all duration-700 ease-in-out ${
+                  selectedParkingId ? 'transform translate-x-0 opacity-100' : 'transform translate-x-full opacity-0'
+                }`}>
+                  <div className="container mx-auto px-4 py-8">
+                    <div className="flex justify-between items-center mb-8">
+                      <h2 className="text-3xl font-bold text-turkish-blue">Abonelik İşlemi</h2>
+                      <button
+                        onClick={() => setSelectedParkingId("")}
+                        className="close-button"
+                      >
+                        ← Geri Dön
+                      </button>
+                    </div>
+                    <SubscriptionForm 
+                      selectedParkingId={selectedParkingId}
+                      onSuccess={handleSubscriptionSuccess}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

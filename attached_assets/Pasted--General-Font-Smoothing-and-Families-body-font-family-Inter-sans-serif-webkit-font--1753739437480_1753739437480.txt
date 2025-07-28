@@ -1,0 +1,491 @@
+/* General Font Smoothing and Families */
+body {
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Other global CSS code */
+:where([class^="ri-"])::before {
+  content: "\f3c2";
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hero Slider Styles */
+.hero-slider {
+  position: relative;
+  overflow: hidden;
+  height: 600px;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+/* Dark Mode Switch Logic (Accept Cookies button) */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #00a6e6;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Animated Card Styles */
+.animated-card {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.animated-card.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Carousel and Counter Card Hover Effects */
+/* Applies to cards in "Otoparklarımız" section and counter/parking cards in Garage.html */
+.bg-white.rounded-lg.shadow-lg.overflow-hidden,
+.bg-white.p-6.rounded-lg.shadow-md.transition-shadow.duration-300.border.border-gray-200,
+.bg-white.p-6.rounded-lg.shadow-md.text-center {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease-in-out;
+}
+
+.bg-white.rounded-lg.shadow-lg.overflow-hidden:hover,
+.bg-white.p-6.rounded-lg.shadow-md.transition-shadow.duration-300.border.border-gray-200:hover,
+.bg-white.p-6.rounded-lg.shadow-md.text-center:hover {
+  transform: scale(1.05); /* Slightly enlarges the card by 5% */
+  box-shadow: 0 8px 10px #008fcc83; /* Makes the shadow more prominent */
+}
+
+/* Glow effect for selected parking card (Garage.html) */
+.parking-card.glow {
+  box-shadow: 0 0 20px 5px rgba(0, 166, 230, 0.7); /* Blue glow */
+  border-color: #00a6e6; /* Blue border */
+}
+
+/* "Bilgi Edin" (Subscribe) Button Styling */
+.aboneolbtn {
+  padding: 8px 16px;
+  background-color: #00a6e6;
+  color: white;
+  border-radius: 9999px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.aboneolbtn:hover {
+  background-color: #62c4ee;
+  transform: scale(1.1);
+  box-shadow: 0 6px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* "Bütün Otoparklara Gözat" (Browse All Parking Lots) Button Styling */
+.gozatbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 12px;
+  border: none;
+  border-radius: 15px;
+  background-color: #00a6e6;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 4px rgba(0, 0, 0, 0.2);
+  margin-top: 10px; /* Specific margin-top for this button */
+}
+
+.gozatbtn:hover {
+  background-color: #63cffa;
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 6px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* General Button Container */
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 30px 0; /* Adjust padding as needed */
+}
+
+/* Maps Icon Styling */
+.mapsicon {
+  background-color: #00a6e6; /* Solid blue background */
+  color: white; /* White icon color */
+  padding: 8px; /* More padding for larger, rounder look */
+  border-radius: 50%; /* Perfectly circular */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; /* Icon width */
+  height: 40px; /* Icon height */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Soft shadow */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.mapsicon:hover {
+  background-color: #7acaec; /* Slightly darker blue on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* More prominent shadow on hover */
+  transform: scale(1.1); /* Slight grow on hover */
+}
+
+.mapsicon.ri-map-pin-line {
+  color: white; /* Ensure Remixicon map pin is white */
+}
+
+/* Map Icon Link Wrapper */
+.map-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.map-icon-link:hover {
+  transform: scale(1.1);
+}
+
+/* Line Separator */
+.line-container {
+  margin-top: 10px; /* Adjusted from Garage.html (50px) to match Borcsorgu/Index (10px) */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.line {
+  width: 100%; /* Adjusted from Garage.html (90%) to match Borcsorgu/Index (100%) */
+  height: 0.06cm;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 166, 230, 1), rgba(0, 0, 0, 0));
+}
+
+/* Counter values (Garage.html) */
+.counter-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #00a6e6;
+}
+
+/* PSS Card Style (Borcsorgu.html and Index.html) */
+.psscart {
+  transition: all 0.3s ease;
+  background-color: #fff; /* Added from Index.html */
+  padding: 2rem; /* Added from Index.html */
+  border-radius: 0.5rem; /* Added from Index.html */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Added from Index.html */
+  border: 1px solid #f3f4f6; /* Added from Index.html */
+}
+
+.psscart:hover {
+  transform: scale(1.03); /* Kept from Borcsorgu_style.css */
+  box-shadow: 0 10px 15px rgba(0,0,0,0.2); /* Merged from Index.html, more prominent */
+}
+
+/* DETAILED LISTING (Borcsorgu.html) */
+.list-group-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  padding: 10px 15px;
+  margin-left: 50px;
+  margin-right: 50px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-weight: 600;
+  background: #f8f9fa;
+  font-size: 0.9rem;
+  transition: none;
+  cursor: default;
+}
+
+.col-plaka {
+  flex-basis: 25%;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.col-otopark {
+  flex-basis: 40%;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.col-ucret {
+  flex-basis: 5%;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.col-durum {
+  flex-basis: 20%;
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 6px 2px;
+  border-radius: 6px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+/* Only buttons will have a background */
+.col-durum[type="submit"],
+.col-durum[type="button"],
+button.col-durum {
+  cursor: pointer;
+}
+
+/* Header row */
+.list-header {
+  font-weight: 700;
+  background-color: #5c7085;
+  color: white;
+  cursor: default;
+  font-size: 0.95rem;
+}
+
+/* Responsive: smaller font and padding on small screens */
+@media (max-width: 480px) {
+  .list-group-item {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+  .col-plaka {
+    flex-basis: 25%;
+  }
+  .col-otopark {
+    flex-basis: 40%;
+  }
+  .col-ucret {
+    flex-basis: 5%;
+  }
+  .col-durum {
+    flex-basis: 30%;
+  }
+}
+
+/* Approval button style (Garage.html) */
+.onay-btn {
+  padding: 15px 30px;
+  background-color: #00a6e6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Pop-up Overlay (Garage.html) */
+.popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Pop-up Content (Garage.html) */
+.popup-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  transform: translateY(20px);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Active (visible) state for pop-up (Garage.html) */
+.popup-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.popup-overlay.active .popup-content {
+  transform: translateY(0);
+}
+
+/* Close Button (Garage.html) */
+.close-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.close-button:hover {
+  background-color: #c82333;
+}
+
+/* Hover underline effect for header/footer links (Index.html) */
+.hover-underline {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hover-underline::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  transform: translateX(-50%) scaleX(0);
+  width: 70%;
+  height: 2px;
+  background: white;
+  border-radius: 2px;
+  opacity: 0.8;
+  transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+}
+
+.hover-underline:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* ISTAY PARK logo and text hover animation (Index.html) */
+.istaypark-hover-group {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Remove the white underline for ISTAY PARK group */
+.istaypark-hover-group::after,
+.istaypark-hover-group:hover::after {
+  display: none !important;
+  content: none !important;
+}
+
+.istayparklogo {
+  transition: transform 0.6s cubic-bezier(.4,0,.2,1), opacity 0.8s cubic-bezier(.4,0,.2,1);
+}
+
+.istayparktext {
+  transition: transform 0.3s cubic-bezier(.4,0,.2,1), opacity 0.2s cubic-bezier(.4,0,.2,1);
+}
+
+.istaypark-hover-group:hover .istayparklogo {
+  transform: translateX(70px) scale(1.5);
+  opacity: 1;
+}
+
+.istaypark-hover-group:hover .istayparktext {
+  transform: translateX(-20px);
+  opacity: 0;
+}
+
+.istaypark-hover-group:not(:hover) .istayparklogo {
+  transform: translateX(0) scale(1);
+  opacity: 1;
+}
+
+.istaypark-hover-group:not(:hover) .istayparktext {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Reverse animation on unhover/focus */
+.istaypark-hover-group:active .istayparklogo,
+.istaypark-hover-group:focus .istayparklogo {
+  transform: translateX(20px) scale(1);
+  opacity: 1;
+}
+
+.istaypark-hover-group:active .istayparktext,
+.istaypark-hover-group:focus .istayparktext {
+  transform: translateX(-20px);
+  opacity: 1;
+}

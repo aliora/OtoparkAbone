@@ -126,9 +126,10 @@
     border-color: var(--secondary-blue);
   }
   
-  .aboneol-btn {
+  /* Bilgi Edin (Subscribe) Button Styling */
+  .aboneolbtn {
     padding: 8px 16px;
-    background-color: var(--secondary-blue);
+    background-color: #00a6e6;
     color: white;
     border-radius: 9999px;
     font-weight: 500;
@@ -137,13 +138,53 @@
     justify-content: center;
     transition: all 0.3s ease;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-    text-decoration: none;
   }
-  
-  .aboneol-btn:hover {
+
+  .aboneolbtn:hover {
     background-color: #62c4ee;
     transform: scale(1.1);
     box-shadow: 0 6px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Bütün Otoparklara Gözat (Browse All Parking Lots) Button Styling */
+  .gozatbtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 12px;
+    border: none;
+    border-radius: 15px;
+    background-color: #00a6e6;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 4px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+  }
+
+  .gozatbtn:hover {
+    background-color: #63cffa;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 6px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Close Button */
+  .close-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
+  }
+
+  .close-button:hover {
+    background-color: #c82333;
   }
   
   .maps-icon {
