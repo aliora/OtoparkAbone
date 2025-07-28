@@ -64,52 +64,58 @@ export default function SubscriptionPage() {
               </div>
             </div>
 
-            {/* Parking Cards Grid */}
-            {isLoading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {[...Array(8)].map((_, i) => (
-                  <div key={i} className="bg-white p-6 rounded-lg shadow-md animate-pulse">
-                    <div className="h-20 bg-gray-200 rounded mb-4"></div>
-                    <div className="h-4 bg-gray-200 rounded mb-2"></div>
-                    <div className="h-3 bg-gray-200 rounded mb-3"></div>
-                    <div className="h-3 bg-gray-200 rounded w-3/4"></div>
+            {/* Main Grid Layout */}
+            <div className="grid lg:grid-cols-4 gap-8">
+              {/* Left side - Parking Cards (3/4 width) */}
+              <div className="lg:col-span-3">
+                {/* Parking Cards Grid */}
+                {isLoading ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {[...Array(8)].map((_, i) => (
+                      <div key={i} className="bg-white p-6 rounded-lg shadow-md animate-pulse">
+                        <div className="h-20 bg-gray-200 rounded mb-4"></div>
+                        <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                        <div className="h-3 bg-gray-200 rounded mb-3"></div>
+                        <div className="h-3 bg-gray-200 rounded w-3/4"></div>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6" id="parkingGarageContainer">
+                    {displayedLocations.map((location) => (
+                      <ParkingCard
+                        key={location.id}
+                        location={location}
+                        isSelected={selectedParkingId === location.id}
+                        onSelect={() => setSelectedParkingId(location.id)}
+                      />
+                    ))}
+                  </div>
+                )}
+
+                {/* Show More Button */}
+                {!showAllParkings && remainingCount > 0 && (
+                  <div className="text-center mt-8">
+                    <button
+                      onClick={() => setShowAllParkings(true)}
+                      className="aboneol-btn"
+                    >
+                      Daha Fazla Otopark Göster (+{remainingCount})
+                    </button>
+                  </div>
+                )}
               </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-6" id="parkingGarageContainer">
-                {displayedLocations.map((location) => (
-                  <ParkingCard
-                    key={location.id}
-                    location={location}
-                    isSelected={selectedParkingId === location.id}
-                    onSelect={() => setSelectedParkingId(location.id)}
+
+              {/* Right side - Subscription Form (1/4 width) */}
+              <div className="lg:col-span-1">
+                {selectedParkingId && (
+                  <SubscriptionForm 
+                    selectedParkingId={selectedParkingId}
+                    onSuccess={handleSubscriptionSuccess}
                   />
-                ))}
+                )}
               </div>
-            )}
-
-            {/* Show More Button */}
-            {!showAllParkings && remainingCount > 0 && (
-              <div className="text-center mt-8">
-                <button
-                  onClick={() => setShowAllParkings(true)}
-                  className="aboneol-btn"
-                >
-                  Daha Fazla Otopark Göster (+{remainingCount})
-                </button>
-              </div>
-            )}
-
-            {/* Subscription Form - appears when parking is selected */}
-            {selectedParkingId && (
-              <div className="mt-12">
-                <SubscriptionForm 
-                  selectedParkingId={selectedParkingId}
-                  onSuccess={handleSubscriptionSuccess}
-                />
-              </div>
-            )}
+            </div>
           </div>
         </div>
       </section>

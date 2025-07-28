@@ -145,9 +145,12 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
 
   return (
     <>
-      <div className="grid lg:grid-cols-3 gap-8">
+      <div className="space-y-4">
         {/* Step 1: License Plate */}
-        <div className={`bg-white rounded-lg shadow-md p-6 transition-all duration-500 ${currentStep >= 1 ? 'opacity-100' : 'opacity-50'}`}>
+        <div className={`bg-white rounded-lg shadow-md p-6 transition-all duration-500 transform ${
+          currentStep === 1 ? 'translate-y-0 opacity-100' : 
+          currentStep > 1 ? '-translate-y-2 opacity-75' : 'translate-y-0 opacity-100'
+        }`}>
           <h3 className="text-lg font-bold text-deep-navy mb-4">1. Plaka Bilgisi</h3>
           <div className="mb-4">
             <Label htmlFor="licensePlate">Plaka Numarası</Label>
@@ -209,7 +212,11 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
         </div>
 
         {/* Step 2: Contact Information */}
-        <div className={`bg-white rounded-lg shadow-md p-6 transition-all duration-500 ${currentStep >= 2 ? 'opacity-100' : 'opacity-50'}`}>
+        <div className={`bg-white rounded-lg shadow-md p-6 transition-all duration-500 transform ${
+          currentStep === 2 ? 'translate-y-0 opacity-100' : 
+          currentStep > 2 ? '-translate-y-2 opacity-75' : 
+          currentStep < 2 ? 'translate-y-4 opacity-50' : 'translate-y-0 opacity-100'
+        }`}>
           <h3 className="text-lg font-bold text-deep-navy mb-4">2. İletişim Bilgileri</h3>
           <div className="space-y-4">
             <div>
@@ -261,7 +268,10 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
         </div>
 
         {/* Step 3: Payment Information */}
-        <div className={`bg-white rounded-lg shadow-md p-6 transition-all duration-500 ${currentStep >= 3 ? 'opacity-100' : 'opacity-50'}`}>
+        <div className={`bg-white rounded-lg shadow-md p-6 transition-all duration-500 transform ${
+          currentStep === 3 ? 'translate-y-0 opacity-100' : 
+          currentStep < 3 ? 'translate-y-8 opacity-50' : 'translate-y-0 opacity-100'
+        }`}>
           <h3 className="text-lg font-bold text-deep-navy mb-4">3. Ödeme Bilgileri</h3>
           <div className="space-y-4">
             <div>
