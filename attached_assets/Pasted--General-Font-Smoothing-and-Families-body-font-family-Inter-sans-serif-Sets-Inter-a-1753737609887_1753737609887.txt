@@ -1,0 +1,318 @@
+/* General Font Smoothing and Families */
+body {
+  font-family: 'Inter', sans-serif; /* Sets Inter as the default font */
+  -webkit-font-smoothing: antialiased; /* Font smoothing for web-kit browsers */
+  -moz-osx-font-smoothing: grayscale; /* Font smoothing for Mozilla browsers */
+}
+
+/* Initial states for animated cards */
+.animated-card {
+  opacity: 0; /* Initially invisible */
+  transform: scale(0.8); /* Initially smaller */
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out; /* Smooth transition effect */
+}
+
+/* States to apply when the card becomes visible */
+.animated-card.is-visible {
+  opacity: 1; /* Fully visible */
+  transform: scale(1); /* Returns to normal size */
+}
+
+/* Other existing CSS code */
+:where([class^="ri-"])::before { content: "\f3c2"; } /* For Remixicon font */
+html {
+  scroll-behavior: smooth; /* Smooth scrolling for in-page transitions */
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0; /* Hides the arrows in number input fields */
+}
+.hero-slider {
+  position: relative;
+  overflow: hidden;
+  height: 600px;
+}
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+.slide.active {
+  opacity: 1;
+}
+
+/* Styles for counter values (used in Garage.html) */
+.counter-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #00a6e6;
+}
+
+/* Dark Mode Switch Logic (Accept Cookies button) */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 24px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+input:checked + .slider {
+  background-color: #00a6e6;
+}
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* General card styles and hover effects (parking cards and counter cards in Garage.html) */
+.bg-white.p-6.rounded-lg.shadow-md.transition-shadow.duration-300.border.border-gray-200,
+.bg-white.p-6.rounded-lg.shadow-md.text-center {
+  transition: transform 0.35s ease-in-out, box-shadow 0.15s ease-in-out, border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.bg-white.p-6.rounded-lg.shadow-md.transition-shadow.duration-300.border.border-gray-200:hover,
+.bg-white.p-6.rounded-lg.shadow-md.text-center:hover {
+  transform: scale(1.06);
+  box-shadow: 0 8px 10px #008fcc83; /* Makes shadow more prominent */
+}
+
+/* Glow effect for selected parking card */
+.parking-card.glow {
+  box-shadow: 0 0 20px 5px rgba(0, 166, 230, 0.7); /* Blue glow */
+  border-color: #00a6e6; /* Blue border */
+}
+
+/* Line separator (used in Garage.html) */
+.line-container {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.line {
+  width: 90%;
+  height: 0.06cm;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 166, 230, 1), rgba(0, 0, 0, 0));
+}
+
+/* "Bilgi Edin" button styling (in Projects) */
+.aboneolbtn {
+    padding: 8px 16px; /* Inner padding for button */
+    background-color: #00a6e6; /* Blue background */
+    color: white; /* White text color */
+    border-radius: 9999px; /* Fully rounded corners */
+    font-weight: 500; /* Medium font weight */
+    display: inline-flex; /* Make content flexible */
+    align-items: center; /* Vertically center */
+    justify-content: center; /* Horizontally center */
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2); /* Make shadow more prominent on hover */
+}
+
+.aboneolbtn:hover {
+    background-color: #62c4ee; /* Slightly darker blue on hover */
+    transform: scale(1.1); /* Slight grow effect on hover */
+    box-shadow: 0 6px 4px rgba(0, 0, 0, 0.2); /* Add a slight shadow */
+}
+
+/* "Bütün Otoparklara Gözat" button styling */
+.gozatbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 12px; /* Height updated */
+  border: none;
+  border-radius: 15px; /* Border radius updated */
+  background-color: #00a6e6; /* Blue background */
+  color: white; /* White text */
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 24x 4px rgba(0, 0, 0, 0.2); /* Add a slight shadow */
+}
+
+.gozatbtn:hover {
+  background-color: #63cffa; /* Slightly darker blue updated on hover */
+  color: white; /* White text on hover */
+  transform: scale(1.1); /* Hover effect added */
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3); /* Make shadow more prominent on hover */
+}
+
+/* General button container */
+.button-container {
+    display: flex;
+    justify-content: center; /* Horizontal centering */
+    align-items: center;     /* Vertical centering (optional) */
+    width: 100%;
+    padding: 20px 0;
+}
+
+/* Approval button style */
+.onay-btn {
+    padding: 15px 30px;
+    background-color: #00a6e6; /* Blue tone */
+    color: white;
+    border: none;
+    border-radius: 8px; /* Soft corners */
+    font-size: 16px;
+    font-weight: 600; /* More prominent font */
+    text-transform: uppercase; /* Uppercase all letters */
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth transitions */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+/* Map Icon Button CSS */
+/* In HTML, map icons are directly styled with Tailwind CSS classes. */
+/* For example: class="bg-gray-100 p-2 rounded-full text-gray-600 hover:text-blue-600 hover:bg-gray-200 transition-colors duration-300" */
+/* A specific CSS class for the map icon (like map-icon-btn-otoparklar) is currently not used. */
+/* Blue and white striped map icon button */
+.mapsicon {
+  background-color: #00a6e6; /* Default background color */
+  background-size:100%;
+  color: white; /* Icon color */
+  padding: 2px; /* Added padding to make it look more like a button */
+  border-radius: 9999px; /* To make it circular like the original */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Prevent content overflow */
+  transition: all 0.3s ease; /* Add transition for hover effect */
+}
+
+.mapsicon:hover {
+  background-image: #00a6e6;
+  transform: scale(1.1); /* Slight grow on hover */
+}
+
+.mapsicon.ri-map-pin-line {
+  color: white; /* Set icon color to white */
+}
+
+/* Map Icon Link Wrapper */
+.map-icon-link {
+  display: inline-flex; /* Make content flexible */
+  align-items: center; /* Vertically center */
+  justify-content: center; /* Horizontally center */
+  text-decoration: none; /* Remove underline */
+  transition: transform 0.3s ease; /* Transition for hover effect */
+}
+
+.map-icon-link:hover {
+  transform: scale(1.1); /* Slight grow on hover */
+}
+
+/* Maps Icon Style */
+.mapsicon {
+  background-color: #00a6e6; /* Solid blue background */
+  color: white; /* White icon color */
+  padding: 4px; /* Add more padding to make the icon appear larger and rounder */
+  border-radius: 50%; /* Make it perfectly round */
+  width: 40px; /* Icon width */
+  height: 40px; /* Icon height */
+  display: inline-flex; /* Make content flexible */
+  align-items: center; /* Vertically center */
+  justify-content: center; /* Horizontally center */
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2); /* Make shadow more prominent on hover */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+}
+
+.mapsicon:hover {
+  background-color: #57cdff; /* Slightly darker blue on hover */
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3); /* Make shadow more prominent on hover */
+}
+
+/* Set Remixicon map pin icon color to white */
+.mapsicon.ri-map-pin-line {
+  color: white;
+}
+
+
+/*POP UP OVERLAY*/
+/* Pop-up Overlay */
+.popup-overlay {
+  display: none; /* Gizli başlar */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Yarı şeffaf arka plan */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Diğer içeriklerin üzerinde olmalı */
+  opacity: 0; /* Animasyon için başlangıç opasitesi */
+  transition: opacity 0.3s ease-in-out; /* Opasite geçişi */
+}
+
+/* Pop-up Content */
+.popup-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  transform: translateY(20px); /* Animasyon için başlangıç pozisyonu */
+  transition: transform 0.3s ease-in-out; /* Transform geçişi */
+}
+
+/* Aktif (görünür) durum */
+.popup-overlay.active {
+  display: flex; /* JavaScript ile görünür yapılır */
+  opacity: 1;
+}
+
+.popup-overlay.active .popup-content {
+  transform: translateY(0); /* Son pozisyon */
+}
+
+/* Close Button */
+.close-button {
+  background-color: #dc3545; /* Kırmızı renk */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.close-button:hover {
+  background-color: #c82333;
+}

@@ -179,8 +179,8 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
   );
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-8">
-      <h2 className="text-2xl font-semibold text-deep-navy mb-6">Abonelik Bilgileri</h2>
+    <div className="bg-white rounded-lg shadow-md p-6 sticky top-8">
+      <h2 className="text-xl font-bold text-deep-navy mb-6">Abonelik Bilgileri</h2>
 
       {/* Step Indicator */}
       <div className="flex items-center justify-between mb-8">
@@ -247,7 +247,7 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
               }
               setCurrentStep(2);
             }}
-            className="w-full bg-turkish-blue hover:bg-turkish-blue/90"
+            className="w-full bg-turkish-blue hover:bg-turkish-blue/90 text-white font-semibold"
           >
             Devam Et
           </Button>
@@ -399,14 +399,14 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
                 type="button"
                 variant="outline"
                 onClick={() => setCurrentStep(1)}
-                className="flex-1"
+                className="flex-1 border-turkish-blue text-turkish-blue hover:bg-turkish-blue hover:text-white"
               >
                 Geri
               </Button>
               <Button
                 type="submit"
                 disabled={createSubscriptionMutation.isPending}
-                className="flex-1 bg-turkish-blue hover:bg-turkish-blue/90"
+                className="flex-1 bg-turkish-blue hover:bg-turkish-blue/90 text-white font-semibold"
               >
                 {createSubscriptionMutation.isPending ? "Gönderiliyor..." : "SMS Doğrulama"}
               </Button>
@@ -455,14 +455,14 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
             <Button
               variant="outline"
               onClick={() => setCurrentStep(2)}
-              className="flex-1"
+              className="flex-1 border-turkish-blue text-turkish-blue hover:bg-turkish-blue hover:text-white"
             >
               Geri
             </Button>
             <Button
               onClick={handleVerification}
               disabled={verifyCodeMutation.isPending}
-              className="flex-1 bg-turkish-blue hover:bg-turkish-blue/90"
+              className="flex-1 bg-turkish-blue hover:bg-turkish-blue/90 text-white font-semibold"
             >
               {verifyCodeMutation.isPending ? "Doğrulanıyor..." : "Aboneliği Tamamla"}
             </Button>

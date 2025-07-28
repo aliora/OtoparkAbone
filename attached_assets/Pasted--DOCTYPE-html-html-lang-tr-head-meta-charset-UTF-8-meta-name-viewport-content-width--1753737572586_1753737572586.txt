@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İSTAY- Akıllı Otopark Sistemleri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"> <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<link rel="stylesheet" href="Garage_style.css"> 
+<link rel="stylesheet" href="styles/Garage_style.css">
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script src="Scripts/javasc.js"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#1a2b4d',secondary:'#00a6e6'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<script src="Scripts/SearchPark.js"></script>
+<script>
+    function confirmNavigation(url) {
+        if (confirm("Bu bağlantı sizi başka bir siteye yönlendirecektir. Devam etmek istiyor musunuz?")) {
+            window.open(url, '_blank');
+        }
+    }
+</script>
+</head>
+<body>
+<header class="bg-primary text-white sticky top-0 z-50 shadow-md">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        
+        <a href="index.html" class="flex items-center space-x-3">
+            <img src="images/HEADERİSPARKLOGO.png" width="50px" height="50px" alt="İSPARK logo">
+            <span class="text-2xl font-['Montserrat'] font-bold tracking-wider text-white">
+                İSTAY
+            </span>
+        </a>
+
+        <nav class="hidden md:flex space-x-6">
+            <a href="index.html" class="text-white hover:text-secondary transition duration-300 font-medium">ANASAYFA</a>
+            <a href="Garage.html" class="text-white hover:text-secondary transition duration-300 font-medium">OTOPARKLARIMIZ</a>
+              <a href="odeme_al.html" class="text-white hover:text-secondary transition duration-300 font-medium">BORÇ SORGULA</a>
+              <a href="Yardım.html" class="text-white hover:text-secondary transition duration-300 font-medium">YARDIM</a>
+        </nav>
+        
+        <button id="mobile-menu-button" class="md:hidden w-10 h-10 flex items-center justify-center text-white">
+            <i class="ri-menu-line ri-2x"></i>
+        </button>
+        
+    </div>
+    
+    <div id="mobile-menu" class="hidden bg-primary md:hidden">
+        <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+            <a href="index.html" class="text-white hover:text-secondary transition duration-300 font-medium"></a>
+            <a href="Yardım.html" class="text-white hover:text-secondary transition duration-300 font-medium">YARDIM</a>
+            <a href="Garage.html" class="text-white hover:text-secondary transition duration-300 font-medium">OTOPARKLARIMIZ</a>
+        </div>
+    </div>
+</header>
+<section class="py-12 bg-gray-50">
+
+<div class="container mx-auto px-4">
+
+    <div class="text-center mb-10">
+      <h2 class="text-4xl lg:text-5xl font-bold text-secondary mb-3">OTOPARKLAR</h2>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-white p-6 rounded-lg shadow-md text-center">
+        <div class="counter-value text-3xl font-bold text-secondary mb-2 " data-target="150">0</div>
+        <h3 class="text-sm font-medium text-gray-700 mb-1 text-4xl lg:text-2xl">Personel</h3>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-md text-center">
+        <div class="counter-value text-3xl font-bold text-secondary mb-2" data-target="95">0</div>
+        <h3 class="text-sm font-medium text-gray-700 mb-1 text-4xl lg:text-2xl">Müşteri Memnuniyeti (%)</h3>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-md text-center">
+        <div class="counter-value text-3xl font-bold text-secondary mb-2" data-target="25">0</div>
+        <h3 class="text-sm font-medium text-gray-700 mb-1 text-4xl lg:text-2xl">Otopark Sayısı</h3>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-md text-center">
+        <div class="counter-value text-3xl font-bold text-secondary mb-2" data-target="7452">0</div>
+        <h3 class="text-sm font-medium text-gray-700 mb-1 text-4xl lg:text-2xl ">Abone Sayımız</h3>
+      </div>
+    </div>
+       <div class="line-container" style="margin-top: 50px;">
+  <div class="line"></div>
+  </div>
+
+  <div class="py-12 bg-gray-50 p-6 rounded-lg">
+    <div class="container mx-auto">
+      <div class="flex justify-center mb-8">
+        <div class="relative w-full max-w-md">
+          <input type="text" id="parkingSearchInput" class="w-full px-5 py-3 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent pr-10" placeholder="Otopark Ara...">
+          <button id="searchButton" class="absolute inset-y-0 right-0 flex items-center pr-3 text-secondary hover:text-primary transition duration-300">
+            <i class="ri-search-line ri-xl"></i>
+          </button>
+          <div id="searchResults" class="absolute z-10 w-full bg-white border border-gray-200 rounded-lg shadow-lg mt-2 hidden"></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-4 md:px-8 lg:px-12" id="parkingGarageContainer">
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="sile-borsa-istanbul-spor-salonu">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/istapark logo.png" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Şile Borsa İstanbul Spor Salonu</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>Üsküdar Cd. No:123, Çavuş, 34980 Şile/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+              <a href="#" id="subscribeButton" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <span class="aboneolbtn">Abone ol</span>
+              </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=41.172973068700756,29.607160861869385')" class="map-icon-link">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="ayazaga-anadolu-ihl">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/istapark logo.png" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Ayazağa Anadolu İHL</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>Ayazağa Anadolu İmam Hatip Lisesi, Maslak, 34485 Sarıyer/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+              <a href="#" id="subscribeButton" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <span class="aboneolbtn">Abone ol</span>
+              </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=41.11002,29.01599')" class="map-icon-link">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="bakirkoy-adliye">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/ss.jpeg" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Bakırköy Adliye</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>İsmail Erez Blv, Osmaniye, 34146 Bakırköy/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+            <a target="_blank" href="abone.html" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+              <span class="aboneolbtn">Bilgi Edin</span>
+            </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=40.9953892, 28.8781849')" class="map-icon-link">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="besiktas-ismail-tarman">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/istapark logo.png" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Beşiktaş İsmail Tarman</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>Muhtar Oya Çolpan Akyüz Sk. No:2, Konaklar, 34330 Beşiktaş/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+              <a href="#" id="subscribeButton" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <span class="aboneolbtn">Abone ol</span>
+              </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=41.0862445, 29.0095224')" class="map-icon target="_blank"-link">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="darulaceze-acik">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/istapark logo.png" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Darülaceze Açık</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>Avrupa Yakası, Halil Rıfat Paşa, 34384 Şişli/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+              <a href="#" id="subscribeButton" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <span class="aboneolbtn">Abone ol</span>
+              </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=41.058471364094984, 28.966955598894153')" class="map-icon-link">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="darulaceze-kapali-otopark">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/istapark logo.png" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Darülaceze Kapalı Otopark</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>İlhanlı Sk. 2-14, Halil Rıfat Paşa, 34384 Şişli/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+              <a href="#" id="subscribeButton" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <span class="aboneolbtn">Abone ol</span>
+              </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=41.05853071256906, 28.968394606048594')"  class="map-icon-link">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="darulaceze-personel-otoparki">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/istapark logo.png" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Darülaceze Personel Otoparkı</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>Top Oyun Havuzu, Perpa Ticaret Merkezi A-Blok No: 2105/D, 34384 Şişli/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+              <a href="#" id="subscribeButton" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <span class="aboneolbtn">Abone ol</span>
+              </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=41.059080827592155, 28.966927437730458')" class="map-icon-link">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="gulbag-selim-sirri-tarcan">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/istapark logo.png" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Gülbağ Selim Sırrı Tarcan</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>Kır Düğün Organizasyonu, Mecidiyeköy, İsmail Tartan Sk., 34381 Şişli/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+              <a href="#" id="subscribeButton" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <span class="aboneolbtn">Abone ol</span>
+              </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=41.072866, 28.9949861')" class="map-icon- target="_blank"link">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="halit-dervis-ibrahim-ioo">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/istapark logo.png" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Halit Derviş İbrahim İÖO</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>Avrupa Yakası, İslambey, 34050 Eyüpsultan/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+              <a href="#" id="subscribeButton" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <span class="aboneolbtn">Abone ol</span>
+              </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=41.04988268610299, 28.92847281230138')" c target="_blank"lass="map-icon-link">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="harbiye">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/WhatsApp Image 2025-07-11 at 10.12.09.jpeg" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Harbiye</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>Büyükdere Cd. No:13, Merkez, 34381 Şişli/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+              <a href="#" id="subscribeButton" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <span class="aboneolbtn">Abone ol</span>
+              </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=41.0624841, 28.988858')" class="map-icon- target="_blank"link">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="isov-mtal-zincirlikuyu">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/istapark logo.png" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">İSOV MTL (Zincirlikuyu)</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>Büyükdere Cd. No:167, Esentepe, 34394 Şişli/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+              <a href="#" id="subscribeButton" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <span class="aboneolbtn">Abone ol</span>
+              </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=41.072206511060564, 29.01556826995779')"  class="map-icon-link">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="kadikoy-moda">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/istapark logo.png" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Kadıköy Moda</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>Demirdöküm Yetkili Servisi Kadıköy İletişim, Caferağa, Şevki Bey Sk. No:28, 34710 Kadıköy/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+              <a href="#" id="subscribeButton" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <span class="aboneolbtn">Abone ol</span>
+              </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=40.9846056, 29.0289346')" class="map-icon target="_blank"-link">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="oguzhan-ioo">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/istapark logo.png" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Oğuzhan İÖO</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>Kültür Sokagi, Kartaltepe, 34040 Bayrampaşa/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+              <a href="#" id="subscribeButton" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <span class="aboneolbtn">Abone ol</span>
+              </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=41.056697337789245, 28.904927386531437')" class="map-icon-link">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="sarayburnu">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/WhatsApp Image 2025-07-10 at 15.35.04.jpeg" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Sarayburnu</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>Hoca Paşa, Sarayburnu İskelesi Avşa - Marmara Adası, 34110 Fatih/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+              <a href="#" id="subscribeButton" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <span class="aboneolbtn">Abone ol</span>
+              </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=41.0170637377907, 28.985485318025834')" c target="_blank"lass="map-icon-link">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="sehit-murat-demirci-fulya">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/istapark logo.png" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Şehit murat demirci - Fulya</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>Atatürk Cd. No:79, Mehmet Akif Ersoy, 34283 Arnavutköy/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+              <a href="#" id="subscribeButton" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <span class="aboneolbtn">Abone ol</span>
+              </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=41.2094132, 28.7142308')" class="map-icon target="_blank"-link">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="selcuk-kiz-meslek-lisesi-fatih">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/istapark logo.png" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Selçuk Kız Meslek Lisesi (Fatih)</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>Halide Edip Adıvar Cd. No:21, Soğanlı, 34183 Bahçelievler/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+              <a href="#" id="subscribeButton" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <span class="aboneolbtn">Abone ol</span>
+              </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=41.0126262, 28.8542641')" class="map-icon target="_blank"-link">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="semsettin-sami-ilkokulu">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/istapark logo.png" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Şemsettin Sami İlkokulu</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>103. Çk., Beştelsiz, 34020 Zeytinburnu/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+              <a href="#" id="subscribeButton" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <span class="aboneolbtn">Abone ol</span>
+              </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=41.0018871, 28.9067696')" class="map-icon target="_blank"-link">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="sile-borsa-istanbul-50-yil">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/istapark logo.png" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Şile Borsa İstanbul 50. Yıl</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>Üsküdar Cd., Çavuş, 34980 Şile/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+              <a href="#" id="subscribeButton" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <span class="aboneolbtn">Abone ol</span>
+              </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=41.1728215, 29.606452')" class="map-icon- target="_blank"link">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="silivri-kaymakamlik">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/WhatsApp Image 2025-07-10 at 15.35.04.jpeg" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Silivri Kaymakamlık</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>Hacı Pervaneçeşme Sk. 13-5, Piri Mehmet Paşa, 34570 Silivri/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+              <a href="#" id="subscribeButton" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <span class="aboneolbtn">Abone ol</span>
+              </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=41.074524, 28.246986')" class="map-icon-l target="_blank"ink">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="silivri-merkez">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/istapark logo.png" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Silivri Merkez</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>Silivri, Alibey, 34570 Silivri/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+              <a href="#" id="subscribeButton" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <span class="aboneolbtn">Abone ol</span>
+              </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=41.073763, 28.248717')" class="map-icon-l target="_blank"ink">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="ulugbey-ioo">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/istapark logo.png" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Uluğbey İÖO</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>Esenler Cd. No:117, Terazidere, 34035 Bayrampaşa/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+              <a href="#" id="subscribeButton" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <span class="aboneolbtn">Abone ol</span>
+              </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=41.033321, 28.900297')" class="map-icon-l target="_blank"ink">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="umraniye-hukumet-konagi">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/istapark logo.png" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Ümraniye Hükümet Konağı</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>Paksoy Sokak 3, Tantavi, 34764 Ümraniye/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+              <a href="#" id="subscribeButton" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <span class="aboneolbtn">Abone ol</span>
+              </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=41.032120, 29.092215')" class="map-icon-l target="_blank"ink">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="umraniye-mtal">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/istapark logo.png" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Ümraniye MTAL</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>Alemdağ Cd, Yamanevler, 34768 Ümraniye/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+              <a href="#" id="subscribeButton" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <span class="aboneolbtn">Abone ol</span>
+              </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=41.02575202240917, 29.104276488586805')"  class="map-icon-link">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col parking-card" id="yenibosna">
+          <div class="w-full h-24 mb-4 rounded-md overflow-hidden">
+            <img src="images/WhatsApp Image 2025-07-10 at 15.35.04.jpeg" alt="Otopark Banner" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Yenibosna</h3>
+          <p class="text-gray-600 mb-4 flex-grow">
+            <span class="block"><i class="ri-map-pin-line mr-2"></i>Yıldırım Beyazıt Cd. 46-50, Zafer, 34194 Bahçelievler/İstanbul</span>
+            <span class="block"><i class="ri-car-line mr-2"></i> Kapasite: 150 araç</span>
+            <span class="block"><i class="ri-time-line mr-2"></i> 7/24</span>
+          </p>
+          <div class="flex items-center justify-between mt-auto">
+              <a href="#" id="subscribeButton" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <span class="aboneolbtn">Abone ol</span>
+              </a>
+            <a href="javascript:void(0);" onclick="confirmNavigation('https://www.google.com/maps/search/?api=1&query=40.997192, 28.834818')" class="map-icon-l target="_blank"ink">
+              <i class="mapsicon ri-map-pin-line"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="line-container" style="margin-top: 110px;">
+      <div class="line"></div>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-primary text-white pt-16 pb-8">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+<div>
+<h3 class="text-xl font-['Trajan'] tracking-wider mb-6">İSTAY</h3>
+<p class="text-gray-300 mb-6">Akıllı otopark sistemleri alanında Türkiye'nin lider çözüm sağlayıcısı. Modern, verimli ve sürdürülebilir otopark yönetim sistemleri.</p>
+<div class="flex space-x-4">
+<a href="#" class="text-gray-300 hover:text-white transition duration-300">
+<i class="ri-facebook-fill ri-lg"></i>
+</a>
+<a href="#" class="text-gray-300 hover:text-white transition duration-300">
+<i class="ri-twitter-fill ri-lg"></i>
+</a>
+<a href="#" class="text-gray-300 hover:text-white transition duration-300">
+<i class="ri-linkedin-fill ri-lg"></i>
+</a>
+<a href="#" class="text-
+gray-300 hover:text-white transition duration-300">
+<i class="ri-instagram-fill ri-lg"></i>
+</a>
+</div>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-6">Hızlı Bağlantılar</h3>
+<ul class="space-y-3">
+<li><a href="index.html" class="text-gray-300 hover:text-white transition duration-300">Anasayfa</a></li>
+<li><a href="#projects" class="text-gray-300 hover:text-white transition duration-300">Otoparklarımız</a></li>
+<li><a href="#about" class="text-gray-300 hover:text-white transition duration-300">Hakkımızda</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-6">Hizmetlerimiz</h3>
+<ul class="space-y-3">
+<li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Akıllı Otopark Sistemleri</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Mobil Uygulama Entegrasyonu</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Ödeme Sistemleri</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Veri Analizi ve Raporlama</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Güvenlik Sistemleri</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Bakım ve Destek</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-6">Bültenimize Bilgi Edinun</h3>
+<p class="text-gray-300 mb-4">Yenilikler ve güncellemelerden haberdar olmak için bültenimize Bilgi Edinun.</p>
+<form class="mb-6">
+<div class="flex">
+<input type="email" placeholder="E-posta adresiniz" class="w-full px-4 py-2 rounded-l focus:outline-none text-gray-800">
+<button type="submit" class="bg-secondary hover:bg-opacity-90 px-4 py-2 rounded-r text-white font-medium transition duration-300 whitespace-nowrap">Bilgi Edin</button>
+</div>
+</form>
+<div class="flex items-center space-x-4">
+<div class="flex items-center">
+<label class="switch mr-2">
+<input type="checkbox" checked>
+<span class="slider"></span>
+</label>
+<span class="text-sm text-gray-300">Çerezleri Kabul Et</span>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-gray-700 text-center md:flex md:justify-between md:text-left">
+<p class="text-gray-400 mb-4 md:mb-0">© 2025 İstay. Tüm hakları saklıdır.</p>
+<div class="flex flex-wrap justify-center md:justify-end gap-4">
+<a href="#" class="text-gray-400 hover:text-white transition duration-300">Gizlilik Politikası</a>
+<a href="#" class="text-gray-400 hover:text-white transition duration-300">Kullanım Şartları</a>
+<a href="#" class="text-gray-400 hover:text-white transition duration-300">KVKK</a>
+</div>
+</div>
+</div>
+</footer>
+</body>
+</html>

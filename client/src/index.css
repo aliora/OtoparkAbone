@@ -13,7 +13,7 @@
   --card-foreground: hsl(20, 14.3%, 4.1%);
   --border: hsl(20, 5.9%, 90%);
   --input: hsl(20, 5.9%, 90%);
-  --primary: hsl(207, 90%, 54%);
+  --primary: hsl(198, 100%, 45%);
   --primary-foreground: hsl(211, 100%, 99%);
   --secondary: hsl(60, 4.8%, 95.9%);
   --secondary-foreground: hsl(24, 9.8%, 10%);
@@ -24,9 +24,11 @@
   --ring: hsl(20, 14.3%, 4.1%);
   --radius: 0.5rem;
   
-  /* Turkish theme colors */
-  --turkish-blue: hsl(207, 90%, 54%);
-  --deep-navy: hsl(230, 45%, 19%);
+  /* İSTAY theme colors */
+  --primary-navy: hsl(220, 45%, 19%);
+  --secondary-blue: hsl(198, 100%, 45%);
+  --turkish-blue: hsl(198, 100%, 45%);
+  --deep-navy: hsl(220, 45%, 19%);
   --turkish-red: hsl(0, 68%, 62%);
   --cool-gray: hsl(215, 13%, 44%);
 }
@@ -67,15 +69,19 @@
 
 @layer utilities {
   .text-turkish-blue {
-    color: var(--turkish-blue);
+    color: var(--secondary-blue);
   }
   
   .bg-turkish-blue {
-    background-color: var(--turkish-blue);
+    background-color: var(--secondary-blue);
   }
   
   .text-deep-navy {
-    color: var(--deep-navy);
+    color: var(--primary-navy);
+  }
+  
+  .bg-deep-navy {
+    background-color: var(--primary-navy);
   }
   
   .text-turkish-red {
@@ -91,11 +97,11 @@
   }
   
   .border-turkish-blue {
-    border-color: var(--turkish-blue);
+    border-color: var(--secondary-blue);
   }
   
   .hover\:bg-turkish-blue:hover {
-    background-color: var(--turkish-blue);
+    background-color: var(--secondary-blue);
   }
   
   .line-clamp-2 {
@@ -103,5 +109,60 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  /* İSTAY specific styling */
+  .parking-card {
+    transition: transform 0.35s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  .parking-card:hover {
+    transform: scale(1.06);
+    box-shadow: 0 8px 10px rgba(0, 166, 230, 0.5);
+  }
+  
+  .parking-card.glow {
+    box-shadow: 0 0 20px 5px rgba(0, 166, 230, 0.7);
+    border-color: var(--secondary-blue);
+  }
+  
+  .aboneol-btn {
+    padding: 8px 16px;
+    background-color: var(--secondary-blue);
+    color: white;
+    border-radius: 9999px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+  }
+  
+  .aboneol-btn:hover {
+    background-color: #62c4ee;
+    transform: scale(1.1);
+    box-shadow: 0 6px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .maps-icon {
+    background-color: var(--secondary-blue);
+    color: white;
+    padding: 4px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+  }
+  
+  .maps-icon:hover {
+    background-color: #57cdff;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
   }
 }
