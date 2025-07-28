@@ -24,22 +24,7 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
   const [showSMSModal, setShowSMSModal] = useState(false);
   const { toast } = useToast();
 
-  // Auto-scroll to next step
-  useEffect(() => {
-    if (currentStep > 1) {
-      const timer = setTimeout(() => {
-        const nextStepElement = document.querySelector(`[data-step="${currentStep}"]`);
-        if (nextStepElement) {
-          nextStepElement.scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'center',
-            inline: 'nearest'
-          });
-        }
-      }, 400); // Delay to allow animation to start
-      return () => clearTimeout(timer);
-    }
-  }, [currentStep]);
+  // No auto-scroll - forms will appear in same position
 
   const form = useForm<InsertSubscription>({
     resolver: zodResolver(insertSubscriptionSchema),
@@ -162,11 +147,11 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
 
   return (
     <>
-      <div className="max-w-lg mx-auto space-y-8">
+      <div className="max-w-lg mx-auto relative h-[600px]">
         {/* Step 1: License Plate */}
         <div 
           data-step="1"
-          className={`bg-white rounded-lg shadow-lg p-8 transition-all duration-700 transform ${
+          className={`absolute inset-0 bg-white rounded-lg shadow-lg p-8 transition-all duration-700 transform ${
             currentStep === 1 ? 'translate-x-0 opacity-100' : 
             currentStep > 1 ? '-translate-x-full opacity-0' : 'translate-x-full opacity-0'
           }`}>
@@ -235,7 +220,7 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
         {/* Step 2: Contact Information */}
         <div 
           data-step="2"
-          className={`bg-white rounded-lg shadow-lg p-8 transition-all duration-700 transform ${
+          className={`absolute inset-0 bg-white rounded-lg shadow-lg p-8 transition-all duration-700 transform ${
             currentStep === 2 ? 'translate-x-0 opacity-100' : 
             currentStep > 2 ? '-translate-x-full opacity-0' : 'translate-x-full opacity-0'
           }`}>
@@ -292,7 +277,7 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
         {/* Step 3: Payment Information */}
         <div 
           data-step="3"
-          className={`bg-white rounded-lg shadow-lg p-8 transition-all duration-700 transform ${
+          className={`absolute inset-0 bg-white rounded-lg shadow-lg p-8 transition-all duration-700 transform ${
             currentStep === 3 ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
           }`}>
           <h3 className="text-2xl font-bold text-deep-navy mb-6 text-center">3. Ödeme Bilgileri</h3>

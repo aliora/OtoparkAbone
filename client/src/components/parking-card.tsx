@@ -34,10 +34,9 @@ export default function ParkingCard({ location, isSelected, onSelect }: ParkingC
 
   return (
     <div
-      className={`bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 flex flex-col parking-card cursor-pointer relative ${
+      className={`bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 flex flex-col parking-card relative ${
         isSelected ? "glow border-2 border-turkish-blue" : ""
       }`}
-      onClick={onSelect}
     >
       {/* Alert indicator for full/limited parking */}
       {availabilityInfo.showAlert && (
