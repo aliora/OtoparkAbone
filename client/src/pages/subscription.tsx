@@ -65,10 +65,10 @@ export default function SubscriptionPage() {
             </div>
 
             {/* Main Layout with Slide Animation */}
-            <div className="relative min-h-screen overflow-hidden">
+            <div className="relative overflow-hidden">
               {/* Parking Cards Container */}
               <div className={`transition-all duration-700 ease-in-out ${
-                selectedParkingId ? 'transform -translate-x-full opacity-50' : 'transform translate-x-0 opacity-100'
+                selectedParkingId ? 'transform -translate-x-1/3 opacity-60 scale-95' : 'transform translate-x-0 opacity-100 scale-100'
               }`}>
                 {/* Parking Cards Grid */}
                 {isLoading ? (
@@ -110,17 +110,17 @@ export default function SubscriptionPage() {
 
               {/* Subscription Form Overlay */}
               {selectedParkingId && (
-                <div className={`absolute inset-0 bg-gray-50 transition-all duration-700 ease-in-out ${
+                <div className={`absolute top-0 right-0 w-1/2 h-full bg-gray-50 transition-all duration-700 ease-in-out ${
                   selectedParkingId ? 'transform translate-x-0 opacity-100' : 'transform translate-x-full opacity-0'
                 }`}>
-                  <div className="container mx-auto px-4 py-8">
-                    <div className="flex justify-between items-center mb-8">
-                      <h2 className="text-3xl font-bold text-turkish-blue">Abonelik İşlemi</h2>
+                  <div className="p-6 h-full overflow-y-auto">
+                    <div className="flex justify-between items-center mb-6">
+                      <h2 className="text-2xl font-bold text-turkish-blue">Abonelik İşlemi</h2>
                       <button
                         onClick={() => setSelectedParkingId("")}
-                        className="close-button"
+                        className="close-button text-sm px-3 py-1"
                       >
-                        ← Geri Dön
+                        ← Geri
                       </button>
                     </div>
                     <SubscriptionForm 

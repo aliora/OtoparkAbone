@@ -148,7 +148,8 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
       <div className="max-w-md mx-auto space-y-6">
         {/* Step 1: License Plate */}
         <div className={`bg-white rounded-lg shadow-lg p-6 transition-all duration-700 transform ${
-          currentStep >= 1 ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
+          currentStep === 1 ? 'translate-x-0 opacity-100' : 
+          currentStep > 1 ? '-translate-x-full opacity-0' : 'translate-x-full opacity-0'
         }`}>
           <h3 className="text-xl font-bold text-deep-navy mb-6">1. Plaka Bilgisi</h3>
           <div className="mb-4">
@@ -214,8 +215,9 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
 
         {/* Step 2: Contact Information */}
         <div className={`bg-white rounded-lg shadow-lg p-6 transition-all duration-700 transform ${
-          currentStep >= 2 ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
-        }`} style={{ transitionDelay: currentStep >= 2 ? '300ms' : '0ms' }}>
+          currentStep === 2 ? 'translate-x-0 opacity-100' : 
+          currentStep > 2 ? '-translate-x-full opacity-0' : 'translate-x-full opacity-0'
+        }`}>
           <h3 className="text-xl font-bold text-deep-navy mb-6">2. İletişim Bilgileri</h3>
           <div className="space-y-4">
             <div>
@@ -268,8 +270,8 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
 
         {/* Step 3: Payment Information */}
         <div className={`bg-white rounded-lg shadow-lg p-6 transition-all duration-700 transform ${
-          currentStep >= 3 ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
-        }`} style={{ transitionDelay: currentStep >= 3 ? '600ms' : '0ms' }}>
+          currentStep === 3 ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
+        }`}>
           <h3 className="text-xl font-bold text-deep-navy mb-6">3. Ödeme Bilgileri</h3>
           <div className="space-y-4">
             <div>
