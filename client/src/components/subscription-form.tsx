@@ -147,9 +147,8 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
     <>
       <div className="space-y-4">
         {/* Step 1: License Plate */}
-        <div className={`bg-white rounded-lg shadow-md p-6 transition-all duration-500 transform ${
-          currentStep === 1 ? 'translate-y-0 opacity-100' : 
-          currentStep > 1 ? '-translate-y-2 opacity-75' : 'translate-y-0 opacity-100'
+        <div className={`bg-white rounded-lg shadow-md p-6 transition-all duration-700 transform ${
+          currentStep >= 1 ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
         }`}>
           <h3 className="text-lg font-bold text-deep-navy mb-4">1. Plaka Bilgisi</h3>
           <div className="mb-4">
@@ -184,7 +183,9 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
           </div>
           <div className="mb-4">
             <div className="bg-gray-50 p-3 rounded-lg">
-              <div className="text-sm text-gray-600">Aylık Tarife</div>
+              <div className="text-sm text-gray-600">Seçilen Otopark</div>
+              <div className="text-lg font-bold text-deep-navy">Otopark #{selectedParkingId}</div>
+              <div className="text-sm text-gray-600 mt-2">Aylık Tarife</div>
               <div className="text-xl font-bold text-turkish-blue">₺299</div>
             </div>
           </div>
@@ -212,11 +213,9 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
         </div>
 
         {/* Step 2: Contact Information */}
-        <div className={`bg-white rounded-lg shadow-md p-6 transition-all duration-500 transform ${
-          currentStep === 2 ? 'translate-y-0 opacity-100' : 
-          currentStep > 2 ? '-translate-y-2 opacity-75' : 
-          currentStep < 2 ? 'translate-y-4 opacity-50' : 'translate-y-0 opacity-100'
-        }`}>
+        <div className={`bg-white rounded-lg shadow-md p-6 transition-all duration-700 transform ${
+          currentStep >= 2 ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
+        }`} style={{ transitionDelay: currentStep >= 2 ? '200ms' : '0ms' }}>
           <h3 className="text-lg font-bold text-deep-navy mb-4">2. İletişim Bilgileri</h3>
           <div className="space-y-4">
             <div>
@@ -268,10 +267,9 @@ export default function SubscriptionForm({ selectedParkingId, onSuccess }: Subsc
         </div>
 
         {/* Step 3: Payment Information */}
-        <div className={`bg-white rounded-lg shadow-md p-6 transition-all duration-500 transform ${
-          currentStep === 3 ? 'translate-y-0 opacity-100' : 
-          currentStep < 3 ? 'translate-y-8 opacity-50' : 'translate-y-0 opacity-100'
-        }`}>
+        <div className={`bg-white rounded-lg shadow-md p-6 transition-all duration-700 transform ${
+          currentStep >= 3 ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
+        }`} style={{ transitionDelay: currentStep >= 3 ? '400ms' : '0ms' }}>
           <h3 className="text-lg font-bold text-deep-navy mb-4">3. Ödeme Bilgileri</h3>
           <div className="space-y-4">
             <div>
