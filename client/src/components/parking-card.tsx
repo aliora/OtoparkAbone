@@ -1,4 +1,4 @@
-import { Car, Clock, MapPin } from "lucide-react";
+import { Car, Clock, MapPin, AlertTriangle } from "lucide-react";
 import type { ParkingLocation } from "@shared/schema";
 
 interface ParkingCardProps {
@@ -10,13 +10,13 @@ interface ParkingCardProps {
 const getAvailabilityInfo = (availability: string) => {
   switch (availability) {
     case "available":
-      return { text: "Müsait", className: "bg-green-100 text-green-800" };
+      return { text: "Müsait", className: "bg-green-100 text-green-800", showAlert: false };
     case "limited":
-      return { text: "Sınırlı", className: "bg-yellow-100 text-yellow-800" };
+      return { text: "Sınırlı", className: "bg-yellow-100 text-yellow-800", showAlert: true };
     case "full":
-      return { text: "Dolu", className: "bg-red-100 text-red-800" };
+      return { text: "Dolu", className: "bg-red-100 text-red-800", showAlert: true };
     default:
-      return { text: "Müsait", className: "bg-green-100 text-green-800" };
+      return { text: "Müsait", className: "bg-green-100 text-green-800", showAlert: false };
   }
 };
 
@@ -25,7 +25,6 @@ export default function ParkingCard({ location, isSelected, onSelect }: ParkingC
 
   const handleMapClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    // Mock coordinates for demo - in real app you'd have actual coordinates
     const query = `${location.name}, ${location.address}`;
     const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
     if (confirm("Bu bağlantı sizi Google Maps'e yönlendirecektir. Devam etmek istiyor musunuz?")) {
@@ -35,36 +34,43 @@ export default function ParkingCard({ location, isSelected, onSelect }: ParkingC
 
   return (
     <div
-      className={`bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 flex flex-col parking-card cursor-pointer ${
+      className={`bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 flex flex-col parking-card cursor-pointer relative ${
         isSelected ? "glow border-2 border-turkish-blue" : ""
       }`}
       onClick={onSelect}
     >
+      {/* Alert indicator for full/limited parking */}
+      {availabilityInfo.showAlert && (
+        <div className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1">
+          <AlertTriangle className="w-4 h-4" />
+        </div>
+      )}
+
       {/* Otopark Banner */}
-      <div className="w-full h-20 mb-4 rounded-md overflow-hidden bg-gradient-to-r from-turkish-blue to-deep-navy flex items-center justify-center">
-        <span className="text-white font-bold text-lg">İSTAY</span>
+      <div className="w-full h-24 mb-4 rounded-md overflow-hidden">
+        <div className="w-full h-full bg-gradient-to-r from-turkish-blue to-deep-navy flex items-center justify-center">
+          <span className="text-white font-bold text-lg">İSTAY</span>
+        </div>
       </div>
       
       <h3 className="text-lg font-bold text-gray-800 mb-2">{location.name}</h3>
-      <div className="text-gray-600 mb-4 flex-grow space-y-1">
-        <div className="flex items-start gap-2">
-          <MapPin className="w-4 h-4 text-turkish-blue mt-0.5 flex-shrink-0" />
-          <span className="text-sm">{location.address}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Car className="w-4 h-4 text-turkish-blue" />
-          <span className="text-sm">Kapasite: {location.capacity} araç</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Clock className="w-4 h-4 text-turkish-blue" />
-          <span className="text-sm">{location.operatingHours}</span>
-        </div>
-      </div>
+      <p className="text-gray-600 mb-4 flex-grow">
+        <span className="block">
+          <MapPin className="inline w-4 h-4 mr-2 text-turkish-blue" />
+          {location.address}
+        </span>
+        <span className="block">
+          <Car className="inline w-4 h-4 mr-2 text-turkish-blue" />
+          Kapasite: {location.capacity} araç
+        </span>
+        <span className="block">
+          <Clock className="inline w-4 h-4 mr-2 text-turkish-blue" />
+          {location.operatingHours}
+        </span>
+      </p>
       
       <div className="flex items-center justify-between mt-auto">
-        <span className={`text-xs px-2 py-1 rounded-full ${availabilityInfo.className}`}>
-          {availabilityInfo.text}
-        </span>
+        <div className="text-xl font-bold text-turkish-blue">₺299/ay</div>
         <button
           onClick={handleMapClick}
           className="maps-icon"

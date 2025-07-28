@@ -40,34 +40,11 @@ export default function SubscriptionPage() {
     <div className="min-h-screen bg-gray-50">
       <Header />
       
-      {/* Stats Section */}
+      {/* Main Section */}
       <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-10">
             <h2 className="text-4xl lg:text-5xl font-bold text-turkish-blue mb-3">OTOPARKLAR</h2>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-            <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <div className="text-3xl font-bold text-turkish-blue mb-2">150</div>
-              <h3 className="text-sm font-medium text-gray-700 text-2xl">Personel</h3>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <div className="text-3xl font-bold text-turkish-blue mb-2">95</div>
-              <h3 className="text-sm font-medium text-gray-700 text-2xl">Müşteri Memnuniyeti (%)</h3>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <div className="text-3xl font-bold text-turkish-blue mb-2">25</div>
-              <h3 className="text-sm font-medium text-gray-700 text-2xl">Otopark Sayısı</h3>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <div className="text-3xl font-bold text-turkish-blue mb-2">7452</div>
-              <h3 className="text-sm font-medium text-gray-700 text-2xl">Abone Sayımız</h3>
-            </div>
-          </div>
-
-          {/* Line separator */}
-          <div className="flex justify-center mb-12">
-            <div className="w-4/5 h-0.5 bg-gradient-to-r from-transparent via-turkish-blue to-transparent"></div>
           </div>
 
           {/* Search Section */}
@@ -87,56 +64,52 @@ export default function SubscriptionPage() {
               </div>
             </div>
 
-            {/* Main Content Grid */}
-            <div className="grid lg:grid-cols-4 gap-8">
-              {/* Left Side - Parking Locations */}
-              <div className="lg:col-span-3">
-                {/* Parking Cards Grid */}
-                {isLoading ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {[...Array(8)].map((_, i) => (
-                      <div key={i} className="bg-white p-6 rounded-lg shadow-md animate-pulse">
-                        <div className="h-20 bg-gray-200 rounded mb-4"></div>
-                        <div className="h-4 bg-gray-200 rounded mb-2"></div>
-                        <div className="h-3 bg-gray-200 rounded mb-3"></div>
-                        <div className="h-3 bg-gray-200 rounded w-3/4"></div>
-                      </div>
-                    ))}
+            {/* Parking Cards Grid */}
+            {isLoading ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {[...Array(8)].map((_, i) => (
+                  <div key={i} className="bg-white p-6 rounded-lg shadow-md animate-pulse">
+                    <div className="h-20 bg-gray-200 rounded mb-4"></div>
+                    <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                    <div className="h-3 bg-gray-200 rounded mb-3"></div>
+                    <div className="h-3 bg-gray-200 rounded w-3/4"></div>
                   </div>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-6" id="parkingGarageContainer">
-                    {displayedLocations.map((location) => (
-                      <ParkingCard
-                        key={location.id}
-                        location={location}
-                        isSelected={selectedParkingId === location.id}
-                        onSelect={() => setSelectedParkingId(location.id)}
-                      />
-                    ))}
-                  </div>
-                )}
-
-                {/* Show More Button */}
-                {!showAllParkings && remainingCount > 0 && (
-                  <div className="text-center mt-8">
-                    <button
-                      onClick={() => setShowAllParkings(true)}
-                      className="aboneol-btn"
-                    >
-                      Daha Fazla Otopark Göster (+{remainingCount})
-                    </button>
-                  </div>
-                )}
+                ))}
               </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-6" id="parkingGarageContainer">
+                {displayedLocations.map((location) => (
+                  <ParkingCard
+                    key={location.id}
+                    location={location}
+                    isSelected={selectedParkingId === location.id}
+                    onSelect={() => setSelectedParkingId(location.id)}
+                  />
+                ))}
+              </div>
+            )}
 
-              {/* Right Side - Subscription Form */}
-              <div className="lg:col-span-1">
+            {/* Show More Button */}
+            {!showAllParkings && remainingCount > 0 && (
+              <div className="text-center mt-8">
+                <button
+                  onClick={() => setShowAllParkings(true)}
+                  className="aboneol-btn"
+                >
+                  Daha Fazla Otopark Göster (+{remainingCount})
+                </button>
+              </div>
+            )}
+
+            {/* Subscription Form - appears when parking is selected */}
+            {selectedParkingId && (
+              <div className="mt-12">
                 <SubscriptionForm 
                   selectedParkingId={selectedParkingId}
                   onSuccess={handleSubscriptionSuccess}
                 />
               </div>
-            </div>
+            )}
           </div>
         </div>
       </section>
